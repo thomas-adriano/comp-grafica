@@ -8,6 +8,4 @@ public class Main {
 		new Frame().setVisible(true);
 	}
 	
-	
-	
 }
