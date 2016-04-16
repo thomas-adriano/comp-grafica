@@ -2,6 +2,7 @@ package br.furb;
 
 import java.awt.BorderLayout;
 
+import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLCapabilities;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -36,6 +37,19 @@ public class Frame extends JFrame {
 		glCaps.setBlueBits(8);
 		glCaps.setGreenBits(8);
 		glCaps.setAlphaBits(8); 
+		
+		/* Cria um canvas, adiciona ao frame e objeto "ouvinte" 
+		 * para os eventos Gl, de mouse e teclado
+		 */
+		Renderer r = new Renderer();
+		GLCanvas canvas = new GLCanvas(glCaps);
+		add(canvas,BorderLayout.CENTER);
+		canvas.addGLEventListener(r);        
+
+		canvas.addMouseListener(r.getMouseListener());
+		canvas.addMouseMotionListener(r.getMouseMotionListener());
+		
+		canvas.requestFocus();	
 
 	}
 	
