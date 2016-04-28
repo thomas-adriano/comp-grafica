@@ -99,7 +99,8 @@ public class Renderer implements GLEventListener {
 					gl.glEnd();
 				}
 
-				for (VertexSelectionBox v : obj.getSelectedVertices()) {
+				VertexSelectionBox v = obj.getSelectedVertice();
+				if (v != null) {
 					v.draw(gl);
 				}
 			}
@@ -107,6 +108,9 @@ public class Renderer implements GLEventListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			Ponto4D p = Ponto4D.mouseCoordinatesToCartesianCoordinates(new Ponto4D(e.getX(), e.getY()));
+			obj.setSelectedVertex(p);
+			
 			initiated = true;
 			long now = System.currentTimeMillis();
 			long elapsed = now - lastClick;
@@ -122,7 +126,6 @@ public class Renderer implements GLEventListener {
 				return;
 			}
 
-			Ponto4D p = Ponto4D.mouseCoordinatesToCartesianCoordinates(new Ponto4D(e.getX(), e.getY()));
 			obj.addPonto(p);
 			glDrawable.display();
 		}

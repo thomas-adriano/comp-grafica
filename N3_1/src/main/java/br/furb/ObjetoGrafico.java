@@ -21,14 +21,13 @@ public class ObjetoGrafico {
 		this.gl = gl;
 	}
 
-	public List<VertexSelectionBox> getSelectedVertices() {
-		List<VertexSelectionBox> r = new ArrayList<VertexSelectionBox>();
+	public VertexSelectionBox getSelectedVertice() {
 		for (VertexSelectionBox a : vertexSelections) {
 			if (a.isSelected()) {
-				r.add(a);
+				return a;
 			}
 		}
-		return r;
+		return null;
 	}
 
 	public void desenhar() {
@@ -88,14 +87,17 @@ public class ObjetoGrafico {
 
 	}
 
-	public void addPonto(Ponto4D p) {
-		if (!finished) {
-			pontos.add(p);
-
+	public void setSelectedVertex(Ponto4D p) {
+		if (!hasAnyUnfinishedObject()) {
 			for (VertexSelectionBox v : vertexSelections) {
 				v.setSelected(p);
 			}
+		}
+	}
 
+	public void addPonto(Ponto4D p) {
+		if (!finished) {
+			pontos.add(p);
 			vertexSelections.add(new VertexSelectionBox(p));
 
 		} else {
