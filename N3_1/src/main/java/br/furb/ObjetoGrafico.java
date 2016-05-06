@@ -121,6 +121,5 @@ public class ObjetoGrafico {
 	public void addObject(ObjetoGrafico o) {
 		this.objetos.add(o);
 	}
-	// TODO FALTAM DOIS METODOS
 
 }
