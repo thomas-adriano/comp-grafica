@@ -2,12 +2,12 @@ package br.furb;
 
 import java.awt.BorderLayout;
 
-import javax.media.opengl.GLCanvas;
-import javax.media.opengl.GLCapabilities;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLCanvas;
 
 public class Frame extends JFrame {
 
@@ -20,37 +20,39 @@ public class Frame extends JFrame {
 	public static final int LARGURA_BORDA_JANELA_WINDOWS = 22;
 	public static final int LARGURA_JANELA = X;
 	public static final int ALTURA_JANELA = Y;
-	
+
 	public Frame() {
 		super("N3_1");
 		setBounds(X, Y, LARGURA_JANELA, ALTURA_JANELA + LARGURA_BORDA_JANELA_WINDOWS);
-	
+
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
-		
-		
-		/* Cria um objeto GLCapabilities para especificar 
-		 * o numero de bits por pixel para RGBA
+
+		/*
+		 * Cria um objeto GLCapabilities para especificar o numero de bits por
+		 * pixel para RGBA
 		 */
-		GLCapabilities glCaps = new GLCapabilities();
+		GLCapabilities glCaps = new GLCapabilities(GLProfile.getDefault());
 		glCaps.setRedBits(8);
 		glCaps.setBlueBits(8);
 		glCaps.setGreenBits(8);
-		glCaps.setAlphaBits(8); 
-		
-		/* Cria um canvas, adiciona ao frame e objeto "ouvinte" 
-		 * para os eventos Gl, de mouse e teclado
+		glCaps.setAlphaBits(8);
+
+		/*
+		 * Cria um canvas, adiciona ao frame e objeto "ouvinte" para os eventos
+		 * Gl, de mouse e teclado
 		 */
 		Renderer r = new Renderer();
 		GLCanvas canvas = new GLCanvas(glCaps);
-		add(canvas,BorderLayout.CENTER);
-		canvas.addGLEventListener(r);        
+		add(canvas, BorderLayout.CENTER);
+		canvas.addGLEventListener(r);
 
 		canvas.addMouseListener(r.getMundo());
 		canvas.addMouseMotionListener(r.getMundo());
-		
-		canvas.requestFocus();	
+		canvas.addKeyListener(r.getMundo());
+
+		canvas.requestFocus();
 
 	}
-	
+
 }

@@ -1,18 +1,11 @@
-
-// Apply the java plugin to add support for Java
-apply plugin: 'application'
+apply plugin: 'java'
 
 repositories {
     jcenter()
 }
 
+
 dependencies {
-	//compile 'org.jogamp.jogl:jogl-all:2.3.2'
-	//compile 'net.java.dev.gluegen:gluegen-rt-macosx-universal:1.0b05'
-	//compile 'net.java.dev.gluegen:gluegen-rt:1.0b05'
-	//compile 'org.jogamp.gluegen:gluegen-rt-main:2.3.2'
-	//compile 'org.jogamp.gluegen:gluegen-rt:2.3.2'
-	
-	
-    testCompile 'junit:junit:4.12'
+    compile 'org.jogamp.jogl:jogl-all-main:2.3.1'
+    compile 'org.jogamp.gluegen:gluegen-rt-main:2.3.1'
 }
