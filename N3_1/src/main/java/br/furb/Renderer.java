@@ -1,16 +1,18 @@
 package br.furb;
 
-import javax.media.opengl.DebugGL;
-import javax.media.opengl.GL;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLEventListener;
+import com.jogamp.opengl.DebugGL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 
 public class Renderer implements GLEventListener {
-	private GL gl;
+	private GL2 gl;
 	private GLAutoDrawable glDrawable;
-	private Mundo mundo = new Mundo();
+	private World mundo = new World();
 
-	public Mundo getMundo() {
+	public World getMundo() {
 		return this.mundo;
 	}
 
@@ -18,16 +20,14 @@ public class Renderer implements GLEventListener {
 	@Override
 	public void init(GLAutoDrawable drawable) {
 		System.out.println("INIT");
-		glDrawable = drawable;
-		gl = drawable.getGL();
-		glDrawable.setGL(new DebugGL(gl));
 
+		gl = (GL2) drawable.getGL();
 		gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		mundo.setDrawable(glDrawable);
 
-		// for (byte i = 0; i < objetos.length; i++) {
-		// objetos[i].atribuirGL(gl);
-		// }
+		glDrawable = drawable;
+		glDrawable.setGL(new DebugGL2(gl));
+
+		mundo.setDrawable(glDrawable);
 
 	}
 
@@ -35,7 +35,7 @@ public class Renderer implements GLEventListener {
 	public void display(GLAutoDrawable arg0) {
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT);
 
-		gl.glMatrixMode(GL.GL_MODELVIEW);
+		gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
 		gl.glLoadIdentity();
 
 		gl.glLineWidth(1.0f);
@@ -47,12 +47,12 @@ public class Renderer implements GLEventListener {
 	}
 
 	@Override
-	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
-	}
-
-	@Override
 	public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3, int arg4) {
 	}
 
+	@Override
+	public void dispose(GLAutoDrawable drawable) {
+
+	}
 
 }

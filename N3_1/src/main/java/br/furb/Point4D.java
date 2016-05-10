@@ -1,23 +1,23 @@
 package br.furb;
 
-public class Ponto4D {
+public class Point4D {
 
 	private int x;
 	private int y;
 	private int z;
 	private int w;
 
-	public Ponto4D(int x, int y) {
+	public Point4D(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public Ponto4D minus(Ponto4D b) {
-		return new Ponto4D(getX() - b.getX(), getY() - b.getY());
+	public Point4D minus(Point4D b) {
+		return new Point4D(getX() - b.getX(), getY() - b.getY());
 	}
 
-	public Ponto4D plus(Ponto4D b) {
-		return new Ponto4D(getX() + b.getX(), getY() + b.getY());
+	public Point4D plus(Point4D b) {
+		return new Point4D(getX() + b.getX(), getY() + b.getY());
 	}
 
 	public int getX() {
@@ -57,7 +57,7 @@ public class Ponto4D {
 		return "Ponto4D [x=" + x + ", y=" + y + "]";
 	}
 
-	public static Ponto4D mouseCoordinatesToCartesianCoordinates(Ponto4D mouseCoord) {
+	public static Point4D mouseCoordinatesToCartesianCoordinates(Point4D mouseCoord) {
 		int x = 0;
 		int y = 0;
 		int middleX = Frame.X / 2;
@@ -68,7 +68,7 @@ public class Ponto4D {
 		x = mouseX - middleX;
 		y = middleY - mouseY;
 
-		return new Ponto4D(x, y);
+		return new Point4D(x, y);
 	}
 
 }
